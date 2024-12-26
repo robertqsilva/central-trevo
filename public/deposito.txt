@@ -1,0 +1,16 @@
+✅  <b>Sua transação foi criada!
+
+📔 Código cópia e cola:</b>
+<code>{codigopix}</code>
+
+<b>✨ <i>Dica: para copiar o código, basta clicar em cima dele 😉</i>
+
+💰 valor: R$ <i>{transaction_amount}</i>
+
+⏰ A transação expira em 10 minutos!
+
+❌ Caso você realize o pagamento e não receba seu saldo, chame o suporte!</b>
+
+<code>@centraltrevoBot</code>
+
+

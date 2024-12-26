@@ -1,0 +1,14 @@
+💳 <b>Bem vindo a Central Trevo 🍀</b>
+
+✅ Material com qualidade nunca vista!
+✅ Material FULL direto da tela.
+✅ Qualidade extrema.
+✅ Boas Compras!
+
+<i>⚠️ NÃO TROCAMOS DADOS DIVERGENTES
+🔁 LEIA OS TERMOS DE TROCAS</i>
+
+💰 Saldo: {saldo}
+📍ID: {chatId}
+
+<code>@centraltrevoBot</code>
