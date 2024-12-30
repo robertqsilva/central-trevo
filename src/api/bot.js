@@ -14,7 +14,7 @@ bot.onText(/\/start/, async (msm) => {
   
   const chatId = msm.chat.id;
   
-  const nome = msm.chat.username
+  const nome = msm.from.username || msm.from.first_name
   let user = await getUserDB(chatId);
 
   
@@ -52,7 +52,8 @@ bot.on("callback_query", async (query) => {
   const messageId = query.message.message_id;
   const data = query.data;
 
-  const userName = query.from.username;
+  
+  const userName = query.from.username || query.from.first_name;
   
   let {saldo} = await getUserDB(chatId);
   if (callbackHandlers[data]) {

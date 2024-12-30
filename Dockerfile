@@ -8,4 +8,4 @@ RUN npm install
 
 COPY . .
 
-CMD ["node", "./src/api/bot.js"] 
+CMD ["node", "./src/api/bot.js"]
