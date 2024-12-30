@@ -10,8 +10,8 @@ const s3 = new aws.S3({
   },
 });
 
-async function uploadArquivos(Key, Body, mimetype) {
-  const arquivo = await s3
+async function uploadFile(Key, Body, mimetype) {
+  const file = await s3
     .upload({
       Bucket: process.env.BACKBLAZE_BUCKET,
       Key,
@@ -21,11 +21,11 @@ async function uploadArquivos(Key, Body, mimetype) {
     .promise();
 
   return {
-    arquivo
+    file
   };
 }
 
-async function excluirImagem(path) {
+async function deleteFile(path) {
   await s3
     .deleteObject({
       Bucket: process.env.BACKBLAZE_BUCKET,
@@ -34,4 +34,4 @@ async function excluirImagem(path) {
     .promise();
 }
 
-module.exports = { uploadArquivos, excluirImagem };
+module.exports = { uploadFile, deleteFile };

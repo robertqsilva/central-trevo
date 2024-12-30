@@ -1,6 +1,6 @@
 💵 Saldo Automático
 
-Gerar Pix de R${valor}
+Gerar Pix de R${amount}
 
 Com saldo automático o saldo cai na mesma hora
 

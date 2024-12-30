@@ -1,0 +1,7 @@
+<b>Minha Carteira</b>
+
+<b>ID:</b>  <code>{chatId}</code>
+
+<i>Saldo</i>: <b>{money}</b>
+
+<code>@centraltrevoBot</code>

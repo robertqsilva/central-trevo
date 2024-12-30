@@ -1,0 +1,7 @@
+<b>💵 Saldo Automático</b>
+
+<i>Gerar Pix de</i> <b>R${money}</b>
+
+<i>Com saldo automático o saldo cai na mesma hora</i>
+
+<code>@centraltrevoBot</code>

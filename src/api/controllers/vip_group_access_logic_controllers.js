@@ -1,7 +1,9 @@
-const { removeSaldoUser } = require("../services/database/database_services");
+const { link } = require("fs");
+const { subtractMoneyDB } = require("../services/database/database_services");
+const getmessages = require("../utils/getMessages");
 
-async function accessGrupoVip(bot, chatId, _, query, _, saldo, userName) {
-  if (saldo < 10) {
+async function accessGroupVip(bot, chatId, _, query, _, money, userName) {
+  if (money < 10) {
     return bot.answerCallbackQuery(query.id, {
       text: `⚠️ É necessário o valor de no minimo 10R$ na conta para entrar no grupo vip.
 
@@ -10,22 +12,20 @@ async function accessGrupoVip(bot, chatId, _, query, _, saldo, userName) {
     });
   }
 
-  const groupId = -1002288732477;
+  const groupId = Number(process.env.GRUPO_ID);
+
   bot
     .createChatInviteLink(groupId, {
       expire_date: Math.floor(Date.now() / 1000) + 300,
       member_limit: 1,
     })
     .then(async (inviteLink) => {
-      await removeSaldoUser(chatId, saldo - 10);
-      bot.sendMessage(
-        chatId,
-        `🍀 ${userName} agora vc faz parte da <b>Central Trevo!</b> 🍀
-        
-Aqui está seu link exclusivo para entrar no grupo. 
-Válido por 5 minutos: ${inviteLink.invite_link}`,
-        { parse_mode: "HTML" }
+      await subtractMoneyDB(chatId, money - 10);
+      const message = getmessages.accessGroupVip(
+        userName,
+        inviteLink.invite_link
       );
+      bot.sendMessage(chatId, message, { parse_mode: "HTML" });
       return;
     })
     .catch((err) => {
@@ -38,4 +38,4 @@ Tente novamente!`,
     });
 }
 
-module.exports = { accessGrupoVip };
+module.exports = { accessGroupVip };

@@ -1,5 +1,6 @@
 const { Payment, MercadoPagoConfig } = require("mercadopago");
-const { addSaldoUser } = require("../database/database_services");
+const { addMoneyDB, getUserDB } = require("../database/database_services");
+const sucessPaymentMessage = require("../../controllers/sucesspayment");
 
 const client = new MercadoPagoConfig({
   accessToken: process.env.TOKEN_GATEWAY,
@@ -35,7 +36,7 @@ async function createPayment(transaction_amount, description) {
   };
 }
 
-async function checkPayment(id_payment, chat_id) {
+async function checkPayment(id_payment, chat_id, bot, userName) {
   let elapsedTime = 0;
   const maxTime = 10 * 60;
   const intervalTime = 5;
@@ -46,18 +47,18 @@ async function checkPayment(id_payment, chat_id) {
     });
 
     if (statusPayment.status === "approved") {
-      await addSaldoUser(chat_id, statusPayment.transaction_amount);
-      console.log("Pagamento aprovado!");
+      const { money } = await getUserDB(chat_id);
+      await addMoneyDB(chat_id, Number(statusPayment.transaction_amount) + Number(money));
+      sucessPaymentMessage(bot, chat_id, userName);
       clearInterval(intervalId);
+
       return;
     } else {
-      console.log("Pagamento ainda não aprovado...");
     }
 
     elapsedTime += intervalTime;
     if (elapsedTime >= maxTime) {
-      console.log("Tempo limite de 10 minutos atingido.");
-      clearInterval(intervalId); // Para o intervalo após 10 minutos
+      clearInterval(intervalId);
     }
   }, intervalTime * 1000);
 }

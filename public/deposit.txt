@@ -1,7 +1,7 @@
 ✅  <b>Sua transação foi criada!
 
 📔 Código cópia e cola:</b>
-<code>{codigopix}</code>
+<code>{codepix}</code>
 
 <b>✨ <i>Dica: para copiar o código, basta clicar em cima dele 😉</i>
 

@@ -1,8 +1,7 @@
 require("dotenv").config();
 
 const {
-  getUserDB,
-  createUser,
+  getUserDB, createUserDB
 } = require("./services/database/database_services");
 const callbackHandlers = require("./utils/require");
 const TelegramBot = require("node-telegram-bot-api");
@@ -14,37 +13,37 @@ bot.onText(/\/start/, async (msm) => {
   
   const chatId = msm.chat.id;
   
-  const nome = msm.from.username || msm.from.first_name
+  const name = msm.from.username || msm.from.first_name
   let user = await getUserDB(chatId);
 
   
   if (!user) {
-    await createUser(nome, chatId, 0);
+    await createUserDB(name, chatId, 0);
     user = await getUserDB(chatId);
   }
 
-  const data = callbackHandlers.start(user.saldo, chatId);
+  const data = callbackHandlers.start(user.money, chatId);
   const options = data.options;
-  const mensagem = data.mensagem;
+  const message = data.message;
 
-  return bot.sendMessage(chatId, mensagem, options);
+  return bot.sendMessage(chatId, message, options);
 });
 
 bot.onText(/\/pix/, async (msm) => {
   const chatId = msm.chat.id;
 
   let user = await getUserDB(chatId);
-  const nome = msm.chat.username;
+  const name = msm.chat.username;
 
   if (!user) {
-    await createUser(nome, chatId, 0);
+    await createUserDB(name, chatId, 0);
   }
 
   const data = callbackHandlers.saldo();
   const options = data.options;
-  const mensagem = data.mensagem;
+  const message = data.message;
 
-  return bot.sendMessage(chatId, mensagem, options);
+  return bot.sendMessage(chatId, message, options);
 });
 
 bot.on("callback_query", async (query) => {
@@ -55,7 +54,7 @@ bot.on("callback_query", async (query) => {
   
   const userName = query.from.username || query.from.first_name;
   
-  let {saldo} = await getUserDB(chatId);
+  let {money} = await getUserDB(chatId);
   if (callbackHandlers[data]) {
     return callbackHandlers[data](
       bot,
@@ -63,7 +62,7 @@ bot.on("callback_query", async (query) => {
       messageId,
       query,
       data,
-      saldo,
+      money,
       userName
     );
   }

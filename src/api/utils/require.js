@@ -1,43 +1,48 @@
-const { start } = require("../controllers/comads.js");
-const { sendTermos } = require("../controllers/comads2.js");
-const { sendStart } = require("../controllers/comads3.js");
-const { sendCard } = require("../controllers/comads4.js");
-const { sendCardFull } = require("../controllers/comads5.js");
-const { sendPix } = require("../controllers/comads7.js");
-const { sendDeposito } = require("../controllers/comads6.js");
-const {updateSaldo} = require("../controllers/comads9.js");
-const { sendSaldoDeposito } = require("../controllers/comads8.js");
-const { sendMix } = require("../controllers/comads10.js");
-const { sendCarteira } = require("../controllers/comads11.js");
-const { sendFree } = require("../controllers/comads12.js");
-const { sendVip } = require("../controllers/comads13.js");
-const { sendCardCC } = require("../controllers/comads14.js");
-const { accessGrupoVip } = require("../controllers/comads15.js");
+const { firstStart } = require("../controllers/first_start_controllers.js");
+const {
+  accessMainMessageStart,
+} = require("../controllers/start_controllers.js");
+const {
+  selectTypePayment,
+} = require("../controllers/select_payment_type_controllers.js");
+const { makeDeposit } = require("../controllers/deposit_pix_controllers.js");
+const {
+  updateMoneyDeposit,
+} = require("../controllers/logic_choose_deposit_amount_controllers.js");
+const {
+  chooseDepositAmount,
+} = require("../controllers/choose_deposit_amount_controllers.js");
+const {
+  accountInfomations,
+} = require("../controllers/account_information_controllers.js");
+const {
+  generateaAfiliateLink,
+} = require("../controllers/affiliated_controllers.js");
+const { groupVipmessage } = require("../controllers/group_vip_controllers.js");
+const {
+  accessGroupVip,
+} = require("../controllers/vip_group_access_logic_controllers.js");
+const { methodsList } = require("../controllers/methodsList.js");
 
 const callbackHandlers = {
-  start: start,
-  termos: sendTermos,
-  cartao: sendCard,
-  card2: sendCardFull,
-  back: sendStart,
-  backcard: sendCard,
-  saldo: sendPix,
-  deposito: sendDeposito,
-  addSaldo: sendSaldoDeposito,
-  add_1: updateSaldo,
-  add_5: updateSaldo,
-  add_10: updateSaldo,
-  add_25: updateSaldo,
-  sub_1: updateSaldo,
-  sub_5: updateSaldo,
-  sub_10: updateSaldo,
-  sub_25: updateSaldo,
-  mix: sendMix,
-  carteira: sendCarteira,
-  free: sendFree,
-  vip: sendVip,
-  cardcc: sendCardCC,
-  grupovip: accessGrupoVip
+  start: firstStart,
+  back: accessMainMessageStart,
+  money: selectTypePayment,
+  deposit: makeDeposit,
+  addmoney: chooseDepositAmount,
+  add_1: updateMoneyDeposit,
+  add_5: updateMoneyDeposit,
+  add_10: updateMoneyDeposit,
+  add_25: updateMoneyDeposit,
+  sub_1: updateMoneyDeposit,
+  sub_5: updateMoneyDeposit,
+  sub_10: updateMoneyDeposit,
+  sub_25: updateMoneyDeposit,
+  infoAcounts: accountInfomations,
+  afiliate: generateaAfiliateLink,
+  vipmessage: groupVipmessage,
+  groupvipaccess: accessGroupVip,
+  methods: methodsList,
 };
 
 module.exports = callbackHandlers;

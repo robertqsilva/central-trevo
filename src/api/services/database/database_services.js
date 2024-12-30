@@ -1,21 +1,23 @@
 const knex = require('../../../database/config.js')
 
 module.exports = {
-    createUser: async (nome, chat_id, saldo) => {
-        const cadastro = await knex('users').insert({nome, chat_id, saldo})
-    },
+  createUserDB: async (name, chat_id, money) => {
+    const createAccount = await knex("users").insert({ name, chat_id, money });
+  },
 
-    addSaldoUser: async (chat_id, saldo) => {
-        const addSaldo = await knex('users').where({chat_id}).update({saldo})
-    },
+  addMoneyDB: async (chat_id, money) => {
+    const updateMoney = await knex("users").where({ chat_id }).update({ money });
+  },
 
-    removeSaldoUser: async (chat_id, saldo) => {
-        const removeSaldo = await knex('users').where({chat_id}).update({saldo})
-    },
+  subtractMoneyDB: async (chat_id, money) => {
+    const updateMoney = await knex("users")
+      .where({ chat_id })
+      .update({ money });
+  },
 
-    getUserDB: async (chat_id) => {
-        const user = await knex('users').where({chat_id}).first()
-        return user
-    },
-
-}
+  getUserDB: async (chat_id) => {
+    const user = await knex("users").where({ chat_id }).first();
+    
+    return user;
+  },
+};

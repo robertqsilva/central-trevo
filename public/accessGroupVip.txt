@@ -1,0 +1,4 @@
+🍀 {userName} agora vc faz parte da <b>Central Trevo!</b> 🍀
+        
+Aqui está seu link exclusivo para entrar no grupo. 
+Válido por 5 minutos: {link}
